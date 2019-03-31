@@ -1,4 +1,4 @@
-from common import str2bin, rc4, num2hex
+from common import str2bin, rc4, num2hex, num2bin
 
 
 def ksa_rs(key: str, n: int, t: int):
@@ -19,9 +19,9 @@ def ksa_rs(key: str, n: int, t: int):
 
 
 def rc4_rs_drop_d(key: str, n: int, t: int, d: int, ksa_alg):
-    return rc4(key, n, t, ksa_alg)[d:]
+    return rc4(key, n, t, d, ksa_alg)
 
 
 if __name__ == '__main__':
-    x = rc4_rs_drop_d('Wiki', 16, 16, 0, ksa_rs)
-    print(num2hex(x))
+    x = rc4('Wiki', 16, 16, 0, ksa_rs)
+    print(num2bin(x))

@@ -28,10 +28,6 @@ def ksa_sst(key: str, n: int, t: int):
     return s
 
 
-def rc4_rs_drop_d(key: str, n: int, t: int, d: int, ksa_alg):
-    return rc4(key, n, t, ksa_alg)[d:]
-
-
 if __name__ == '__main__':
-    x = rc4_rs_drop_d('Wiki', 16, 16, 0, ksa_sst)
+    x = rc4('Wiki', 16, 16, 0, ksa_sst)
     print(num2hex(x))

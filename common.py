@@ -1,13 +1,9 @@
 from typing import List
 
-key_5 = 'korne'
-key_40 = 'encryption scheme uses two algorithmspzd'
-key_64 = 'PBKDF2 password strengthener; and the CCM and OCB authenticated-'
-key_128 = "Main reason not to use SJCL (and yes, it will sound stupid from a crypto perspective) is " \
-          "that I don't want to load it on every p"
-N = [16, 64, 256]
-KEYS = [key_40, key_64, key_128]
-D = [0, 1, 2, 3]
+_key_128 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nisi vestibulum, condimentum sem vitae, cursus nisi. Donec non ex'
+_key_64 = "It's hard to fail, but it's worse never to have tried to succeed"
+_key_40 = "It's hard to fail, but it's worse never to have tried to succeed"[:40]
+KEYS = {40: _key_40, 64: _key_64, 128: _key_128}
 
 
 def swap(a, i, j):
@@ -23,24 +19,27 @@ def str2bin(key):
 
 
 def num2bin(lst):
-    return ''.join(format(x, '08b') for x in lst)
+    return ''.join(format(x, 'b') for x in lst)
 
 
 def num2hex(lst: List[int]):
     return ''.join([format(x, '02X') for x in lst])
 
 
-def prga(s: List[int], n: int):
+def prga(s: List[int], n: int, d: int):
     i = j = 0
+    tmp_d = 0
     while True:
+        tmp_d += 1
         i = (i + 1) % n
         j = (j + s[i]) % n
         swap(s, i, j)
         z = s[(s[i] + s[j]) % n]
-        yield z
+        if tmp_d > d:
+            tmp_d = 0
+            yield z
 
 
-def rc4(key: str, n: int, t: int, ksa):
+def rc4(key: str, n: int, t: int, d: int, ksa):
     s = ksa(key, n, t)
-    stream = prga(s, n)
-    return [next(stream) for _ in range(len(s))]
+    return prga(s, n, d)

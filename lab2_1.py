@@ -1,4 +1,8 @@
-from common import str2num, rc4, num2hex
+from common import str2num, rc4
+from signal import signal, SIGPIPE, SIG_DFL
+import sys
+
+signal(SIGPIPE, SIG_DFL)
 
 
 def ksa(key: str, n: int, t: int):
@@ -12,10 +16,8 @@ def ksa(key: str, n: int, t: int):
     return s
 
 
-def rc4_drop_d(key: str, n: int, t: int, d: int, ksa_alg):
-    return rc4(key, n, t, ksa_alg)[d:]
-
-
 if __name__ == '__main__':
-    x = rc4_drop_d('Wiki', 256, 256, 0, ksa)
-    print(num2hex(x))
+    key = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nisi vestibulum, condimentum sem vitae, cursus nisi. Donec non ex'
+    stream = rc4(key, 16, 16, 0, ksa)
+    for i in range(10 ** 4):
+        sys.stdout.buffer.write(bytes(str(next(stream)), 'utf-8'))
