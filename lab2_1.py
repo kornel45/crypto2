@@ -19,5 +19,5 @@ def ksa(key: str, n: int, t: int):
 if __name__ == '__main__':
     key = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nisi vestibulum, condimentum sem vitae, cursus nisi. Donec non ex'
     stream = rc4(key, 16, 16, 0, ksa)
-    for i in range(10 ** 4):
-        sys.stdout.buffer.write(bytes(str(next(stream)), 'utf-8'))
+    for i in range(10 ** 1):
+        sys.stdout.buffer.write(bytes([next(stream)]))

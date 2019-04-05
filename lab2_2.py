@@ -1,3 +1,5 @@
+import sys
+
 from common import str2bin, rc4, num2hex, num2bin
 
 
@@ -23,5 +25,7 @@ def rc4_rs_drop_d(key: str, n: int, t: int, d: int, ksa_alg):
 
 
 if __name__ == '__main__':
-    x = rc4('Wiki', 16, 16, 0, ksa_rs)
-    print(num2bin(x))
+    stream = rc4('Wiki', 16, 16, 0, ksa_rs)
+
+    for _ in range(10 ** 1):
+        sys.stdout.buffer.write(bytes([next(stream)]))

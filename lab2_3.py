@@ -1,3 +1,5 @@
+import sys
+
 from common import str2num, rc4, num2hex, swap
 
 
@@ -29,5 +31,6 @@ def ksa_sst(key: str, n: int, t: int):
 
 
 if __name__ == '__main__':
-    x = rc4('Wiki', 16, 16, 0, ksa_sst)
-    print(num2hex(x))
+    stream = rc4('Wiki', 16, 16, 0, ksa_sst)
+    for _ in range(10 ** 1):
+        sys.stdout.buffer.write(bytes([next(stream)]))

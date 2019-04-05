@@ -1,7 +1,7 @@
 from typing import List
 
 _key_128 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nisi vestibulum, condimentum sem vitae, cursus nisi. Donec non ex'
-_key_64 = "It's hard to fail, but it's worse never to have tried to succeed"
+_key_64 = "En's hard to fail, but it's worse never to have tried to succeed"
 _key_40 = "It's hard to fail, but it's worse never to have tried to succeed"[:40]
 KEYS = {40: _key_40, 64: _key_64, 128: _key_128}
 
