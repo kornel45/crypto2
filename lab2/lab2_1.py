@@ -1,6 +1,7 @@
-from common import str2num, rc4
-from signal import signal, SIGPIPE, SIG_DFL
 import sys
+from signal import signal, SIGPIPE, SIG_DFL
+
+from common import str2num, rc4
 
 signal(SIGPIPE, SIG_DFL)
 
